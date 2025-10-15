@@ -1,13 +1,18 @@
-name: MYCI
+name: MYCI2
 on: [push]
 jobs:
   job1:
     runs-on: ubuntu-latest
-    container:
-      image: node:8
+    services:
+      nginx:
+        image: nginx
+        ports:
+          - 8080:80
+    
     steps:
     - uses: actions/checkout@v1
     - run:
         node -v
         curl localhost:8080
+        echo "Nginx available on 127.0.0.1:${{ job.services.nginx.ports['80'] }}"
 
