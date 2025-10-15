@@ -11,8 +11,8 @@ jobs:
     
     steps:
     - uses: actions/checkout@v1
-    - run:
+    - run: |
         node -v
         curl localhost:8080
         echo "Nginx available on 127.0.0.1:${{ job.services.nginx.ports['80'] }}"
-
+        echo ${{secrets.xmd_id}}
